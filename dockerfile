@@ -5,7 +5,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY. haha i've just done it!!!!!!
 #
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
