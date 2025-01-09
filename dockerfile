@@ -74,6 +74,7 @@ RUN set -eux; \
 		--with-system-expat \
 		--with-ensurepip \
     		--disable-gil \
+    --enable-experimental-jit
 	; \
 	nproc="$(nproc)"; \
 	EXTRA_CFLAGS="$(dpkg-buildflags --get CFLAGS)"; \
