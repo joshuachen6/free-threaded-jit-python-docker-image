@@ -5,7 +5,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY. haha i've just done it!!!!!!
 #
 
-FROM debian:trixie-slim
+FROM debian:bookworm-slim
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -27,7 +27,10 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends \    
+    lsb-release \
+    software-properties-common \
+    gnupg \
 		dpkg-dev \
 		gcc \
 		gnupg \
@@ -49,9 +52,11 @@ RUN set -eux; \
 		wget \
 		xz-utils \
 		zlib1g-dev \
-    llvm-18 \
 	; \
 	\
+  wget https://apt.llvm.org/llvm.sh; \
+  chmod +x llvm.sh; \
+  ./llvm.sh 18; \
 	wget -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz"; \
 	wget -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc"; \
 	GNUPGHOME="$(mktemp -d)"; export GNUPGHOME; \
